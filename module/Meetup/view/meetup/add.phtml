@@ -1,0 +1,30 @@
+<h1>Add a meetup</h1>
+
+<?php
+    $form = $this->form; /* @var $form \Zend\Form\Form */
+?>
+
+<?= $this->form()->openTag($form); ?>
+
+<div>
+    <?= $this->formRow($form->get('title')) ?>
+</div>
+
+<div>
+    <?= $this->formRow($form->get('description')) ?>
+</div>
+
+<div>
+    <?= $this->formRow($form->get('stime')) ?>
+</div>
+
+<div>
+    <?= $this->formRow($form->get('etime')) ?>
+</div>
+
+<div>
+    <?= $this->formInput($form->get('submit')) ?>
+</div>
+
+
+<?= $this->form()->closeTag($form); ?>
