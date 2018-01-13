@@ -1,4 +1,7 @@
+Creation BDD de base
+---------------------
 
+```sql
 CREATE TABLE `meetups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
@@ -7,9 +10,12 @@ CREATE TABLE `meetups` (
   `etime` varchar(50) NOT NULL,
   PRIMARY KEY (id)
 );
+```
 
----------------------------------
+Creation BDD évoluée
+---------------------
 
+```sql
 CREATE TABLE `companies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -17,7 +23,8 @@ CREATE TABLE `companies` (
   `city` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 );
-
+```
+```sql
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(50) NOT NULL,
@@ -26,8 +33,8 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (company_id) REFERENCES companies(id)
 );
-
-
+```
+```sql
 CREATE TABLE `meetups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
@@ -40,7 +47,8 @@ CREATE TABLE `meetups` (
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (company_id) REFERENCES companies(id)
 );
-
+```
+```sql
 CREATE TABLE `meetups_users` (
     `meetup_id` INT NOT NULL,
     `user_id` INT NOT NULL,
@@ -48,3 +56,4 @@ CREATE TABLE `meetups_users` (
     FOREIGN KEY (meetup_id) REFERENCES meetups(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+```
