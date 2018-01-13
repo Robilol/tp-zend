@@ -17,7 +17,7 @@ final class CompanyRepository extends EntityRepository
     }
 
 
-    public function createCompanyFromNameAndDescription(string $name, string $address, string $city)
+    public function createCompany(string $name, string $address, string $city)
     {
         return new Company($name, $address, $city);
     }

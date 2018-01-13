@@ -1,0 +1,14 @@
+<h1>Companies</h1>
+
+<table>
+    <tr>
+        <td>Id</td><td>Name</td><td>Address</td><td>City</td><td>Options</td>
+    </tr>
+    <?php foreach ($this->companies as $company): /* @var $company \Meetup\Entity\Company */ ?>
+        <tr>
+            <td><?= $company->getId() ?></td><td><?= $company->getName() ?></td><td><?= $company->getAddress() ?></td><td><?= $company->getCity() ?></td><td><a href="<?= $this->url('company/edit', ['id' => $company->getId()]) ?>" class="btn btn-primary">Edit</a><a href="<?= $this->url('company/delete', ['id' => $company->getId()]) ?>" class="btn btn-primary">Delete</a><a href="<?= $this->url('company/show', ['id' => $company->getId()]) ?>" class="btn btn-primary">Show</a></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+<a href="<?= $this->url('company/add'); ?>" class="btn btn-primary">Add new</a>

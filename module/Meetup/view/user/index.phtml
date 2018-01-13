@@ -1,4 +1,4 @@
-<h1>Meetups</h1>
+<h1>Users</h1>
 
 <table>
     <tr>
@@ -6,7 +6,7 @@
     </tr>
     <?php foreach ($this->users as $user): /* @var $user \Meetup\Entity\User */ ?>
         <tr>
-            <td><?= $user->getId() ?></td><td><?= $user->getFirstname() ?></td><td><?= $user->getLastname() ?></td><td><?= $user->getCompany() ?></td><td><a href="<?= $this->url('user/edit', ['id' => $user->getId()]) ?>" class="btn btn-primary">Edit</a><a href="<?= $this->url('user/delete', ['id' => $user->getId()]) ?>" class="btn btn-primary">Delete</a><a href="<?= $this->url('user/show', ['id' => $user->getId()]) ?>" class="btn btn-primary">Show</a></td>
+            <td><?= $user->getId() ?></td><td><?= $user->getFirstname() ?></td><td><?= $user->getLastname() ?></td><td><?= $user->getCompany()->getName() ?></td><td><a href="<?= $this->url('user/edit', ['id' => $user->getId()]) ?>" class="btn btn-primary">Edit</a><a href="<?= $this->url('user/delete', ['id' => $user->getId()]) ?>" class="btn btn-primary">Delete</a><a href="<?= $this->url('user/show', ['id' => $user->getId()]) ?>" class="btn btn-primary">Show</a></td>
         </tr>
     <?php endforeach; ?>
 </table>

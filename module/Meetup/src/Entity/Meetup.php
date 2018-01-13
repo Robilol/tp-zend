@@ -7,6 +7,7 @@ namespace Meetup\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Ramsey\Uuid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
+use Meetup\Entity\User;
 
 /**
  * @package Application\Entity
@@ -45,6 +46,27 @@ class Meetup
     private $etime = '';
 
     /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $creator;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Company")
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
+     */
+    private $company;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User")
+     * @ORM\JoinTable(name="meetups_users",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="meetup_id", referencedColumnName="id")}
+     *      )
+     */
+    private $participants;
+
+    /**
      * Meetup constructor.
      * @param $title
      * @param string $description
@@ -53,12 +75,15 @@ class Meetup
      * @param $creator
      * @param $company
      */
-    public function __construct($title, $description, $stime, $etime)
+    public function __construct($title, $description, $stime, $etime, $creator, $company)
     {
         $this->title = $title;
         $this->description = $description;
         $this->stime = $stime;
         $this->etime = $etime;
+        $this->creator = $creator;
+        $this->company = $company;
+        $this->participants = new ArrayCollection();
     }
 
     /**
@@ -139,5 +164,63 @@ class Meetup
     public function setEtime($etime)
     {
         $this->etime = $etime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    /**
+     * @param mixed $creator
+     */
+    public function setCreator($creator)
+    {
+        $this->creator = $creator;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param mixed $company
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParticipants()
+    {
+        return $this->participants;
+    }
+
+    /**
+     * @param mixed $participants
+     */
+    public function setParticipants($participants)
+    {
+        $this->participants = $participants;
+    }
+
+    public function addParticipant($participant)
+    {
+        $this->participants[] = $participant;
+    }
+
+    public function clearParticipant()
+    {
+        $this->participants = [];
     }
 }

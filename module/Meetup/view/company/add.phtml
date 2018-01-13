@@ -1,0 +1,26 @@
+<h1>Add a company</h1>
+
+<?php
+    $form = $this->form; /* @var $form \Zend\Form\Form */
+?>
+
+<?= $this->form()->openTag($form); ?>
+
+<div>
+    <?= $this->formRow($form->get('name')) ?>
+</div>
+
+<div>
+    <?= $this->formRow($form->get('address')) ?>
+</div>
+
+<div>
+    <?= $this->formRow($form->get('city')) ?>
+</div>
+
+<div>
+    <?= $this->formInput($form->get('submit')) ?>
+</div>
+
+
+<?= $this->form()->closeTag($form); ?>

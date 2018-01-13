@@ -5,54 +5,55 @@ declare(strict_types=1);
 namespace Meetup\Controller;
 
 use Meetup\Entity\Meetup;
+use Meetup\Form\CompanyForm;
+use Meetup\Repository\CompanyRepository;
 use Meetup\Repository\MeetupRepository;
 use Meetup\Form\MeetupForm;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-final class MeetupController extends AbstractActionController
+final class CompanyController extends AbstractActionController
 {
     /**
-     * @var MeetupRepository
+     * @var CompanyRepository
      */
-    private $meetupRepository;
+    private $companyRepository;
 
     /**
-     * @var MeetupForm
+     * @var CompanyForm
      */
-    private $meetupForm;
+    private $companyForm;
 
-    public function __construct(MeetupRepository $meetupRepository, MeetupForm $meetupForm)
+    public function __construct(CompanyRepository $companyRepository, CompanyForm $companyForm)
     {
-        $this->meetupRepository = $meetupRepository;
-        $this->meetupForm = $meetupForm;
+        $this->companyRepository = $companyRepository;
+        $this->companyForm = $companyForm;
     }
 
     public function indexAction()
     {
         return new ViewModel([
-            'meetups' => $this->meetupRepository->findAll(),
+            'companies' => $this->companyRepository->findAll(),
         ]);
     }
 
     public function addAction()
     {
-        $form = $this->meetupForm;
+        $form = $this->companyForm;
 
         /* @var $request Request */
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $meetup = $this->meetupRepository->createMeetupFromNameAndDescription(
-                    $form->getData()['title'],
-                    $form->getData()['description'] ?? '',
-                    $form->getData()['stime'],
-                    $form->getData()['etime']
+                $company = $this->companyRepository->createCompany(
+                    $form->getData()['name'],
+                    $form->getData()['address'] ?? '',
+                    $form->getData()['city']
                 );
-                $this->meetupRepository->add($meetup);
-                return $this->redirect()->toRoute('meetup');
+                $this->companyRepository->add($company);
+                return $this->redirect()->toRoute('company');
             }
         }
 
@@ -65,25 +66,24 @@ final class MeetupController extends AbstractActionController
 
     public function editAction()
     {
-        $meetupId = $this->params()->fromRoute('id');
+        $companyId = $this->params()->fromRoute('id');
 
-        $meetup = $this->meetupRepository->find($meetupId);
+        $company = $this->companyRepository->find($companyId);
 
-        $form = $this->meetupForm;
+        $form = $this->companyForm;
 
         /* @var $request Request */
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $this->meetupRepository->editMeetup(
-                    $meetup,
-                    $form->getData()['title'],
-                    $form->getData()['description'] ?? '',
-                    $form->getData()['stime'],
-                    $form->getData()['etime']
+                $this->companyRepository->editCompany(
+                    $company,
+                    $form->getData()['name'],
+                    $form->getData()['address'] ?? '',
+                    $form->getData()['city']
                 );
-                return $this->redirect()->toRoute('meetup');
+                return $this->redirect()->toRoute('company');
             }
         }
 
@@ -91,29 +91,29 @@ final class MeetupController extends AbstractActionController
 
         return new ViewModel([
             'form' => $form,
-            'meetup' => $meetup,
+            'company' => $company,
         ]);
     }
 
     public function showAction()
     {
-        $meetupId = $this->params()->fromRoute('id');
+        $companyId = $this->params()->fromRoute('id');
 
-        $meetup = $this->meetupRepository->find($meetupId);
+        $company = $this->companyRepository->find($companyId);
 
         return new ViewModel([
-            'meetup' => $meetup,
+            'company' => $company,
         ]);
     }
 
     public function deleteAction()
     {
-        $meetupId = $this->params()->fromRoute('id');
+        $companyId = $this->params()->fromRoute('id');
 
-        $meetup = $this->meetupRepository->find($meetupId);
+        $company = $this->companyRepository->find($companyId);
 
-        $this->meetupRepository->deleteMeetup($meetup);
+        $this->companyRepository->deletecompany($company);
 
-        return $this->redirect()->toRoute('meetup');
+        return $this->redirect()->toRoute('company');
     }
 }

@@ -6,6 +6,7 @@ namespace Meetup\Controller;
 
 use Meetup\Entity\Meetup;
 use Meetup\Form\UserForm;
+use Meetup\Repository\CompanyRepository;
 use Meetup\Repository\MeetupRepository;
 use Meetup\Form\MeetupForm;
 use Meetup\Repository\UserRepository;
@@ -21,14 +22,14 @@ final class UserController extends AbstractActionController
     private $userRepository;
 
     /**
-     * @var UserForm
+     * @var CompanyRepository
      */
-    private $userForm;
+    private $companyRepository;
 
-    public function __construct(UserRepository $userRepository, UserForm $userForm)
+    public function __construct(UserRepository $userRepository, CompanyRepository $companyRepository)
     {
         $this->userRepository = $userRepository;
-        $this->userForm = $userForm;
+        $this->companyRepository = $companyRepository;
     }
 
     public function indexAction()
@@ -40,21 +41,22 @@ final class UserController extends AbstractActionController
 
     public function addAction()
     {
-        $form = $this->userForm;
+        $companies = $this->companyRepository->findAll();
+
+        $form = new UserForm($companies);
 
         /* @var $request Request */
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $meetup = $this->meetupRepository->createMeetupFromNameAndDescription(
-                    $form->getData()['title'],
-                    $form->getData()['description'] ?? '',
-                    $form->getData()['stime'],
-                    $form->getData()['etime']
+                $user = $this->userRepository->createUser(
+                    $form->getData()['firstname'],
+                    $form->getData()['lastname'],
+                    $this->companyRepository->find($form->getData()['company'])
                 );
-                $this->meetupRepository->add($meetup);
-                return $this->redirect()->toRoute('meetup');
+                $this->userRepository->add($user);
+                return $this->redirect()->toRoute('user');
             }
         }
 
@@ -67,25 +69,26 @@ final class UserController extends AbstractActionController
 
     public function editAction()
     {
-        $meetupId = $this->params()->fromRoute('id');
+        $userId = $this->params()->fromRoute('id');
 
-        $meetup = $this->meetupRepository->find($meetupId);
+        $user = $this->userRepository->find($userId);
 
-        $form = $this->meetupForm;
+        $companies = $this->companyRepository->findAll();
+
+        $form = new UserForm($companies);
 
         /* @var $request Request */
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $this->meetupRepository->editMeetup(
-                    $meetup,
-                    $form->getData()['title'],
-                    $form->getData()['description'] ?? '',
-                    $form->getData()['stime'],
-                    $form->getData()['etime']
+                $this->userRepository->edituser(
+                    $user,
+                    $form->getData()['firstname'],
+                    $form->getData()['lastname'],
+                    $this->companyRepository->find($form->getData()['company'])
                 );
-                return $this->redirect()->toRoute('meetup');
+                return $this->redirect()->toRoute('user');
             }
         }
 
@@ -93,29 +96,29 @@ final class UserController extends AbstractActionController
 
         return new ViewModel([
             'form' => $form,
-            'meetup' => $meetup,
+            'user' => $user,
         ]);
     }
 
     public function showAction()
     {
-        $meetupId = $this->params()->fromRoute('id');
+        $userId = $this->params()->fromRoute('id');
 
-        $meetup = $this->meetupRepository->find($meetupId);
+        $user = $this->userRepository->find($userId);
 
         return new ViewModel([
-            'meetup' => $meetup,
+            'user' => $user,
         ]);
     }
 
     public function deleteAction()
     {
-        $meetupId = $this->params()->fromRoute('id');
+        $userId = $this->params()->fromRoute('id');
 
-        $meetup = $this->meetupRepository->find($meetupId);
+        $user = $this->userRepository->find($userId);
 
-        $this->meetupRepository->deleteMeetup($meetup);
+        $this->userRepository->deleteuser($user);
 
-        return $this->redirect()->toRoute('meetup');
+        return $this->redirect()->toRoute('user');
     }
 }

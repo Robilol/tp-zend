@@ -18,7 +18,7 @@ final class UserRepository extends EntityRepository
     }
 
 
-    public function createUserFromNameAndDescription(string $firstname, string $lastname, Company $company)
+    public function createUser(string $firstname, string $lastname, Company $company)
     {
         return new User($firstname, $lastname, $company);
     }

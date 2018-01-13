@@ -1,4 +1,4 @@
-<h1>Add a meetup</h1>
+<h1>Edit a meetup</h1>
 
 <?php
     $form = $this->form; /* @var $form \Zend\Form\Form */
@@ -20,6 +20,18 @@
 
 <div>
 <?= $this->formRow($form->get('etime')->setValue($meetup->getEtime())) ?>
+</div>
+
+<div>
+    <?= $this->formRow($form->get('creator')->setValue($meetup->getCreator())) ?>
+</div>
+
+<div>
+    <?= $this->formRow($form->get('company')->setValue($meetup->getCompany())) ?>
+</div>
+
+<div>
+    <?= $this->formRow($form->get('participants')->setValue($meetup->getParticipants())) ?>
 </div>
 
 <div>
