@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Meetup\Controller;
 
-use Meetup\Entity\Meetup;
 use Meetup\Form\UserForm;
 use Meetup\Repository\CompanyRepository;
-use Meetup\Repository\MeetupRepository;
-use Meetup\Form\MeetupForm;
 use Meetup\Repository\UserRepository;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Mvc\Controller\AbstractActionController;

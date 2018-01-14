@@ -8,7 +8,6 @@ use Meetup\Entity\Company;
 use Meetup\Entity\Meetup;
 use Doctrine\ORM\EntityRepository;
 use Meetup\Entity\User;
-use Meetup\Module;
 
 final class MeetupRepository extends EntityRepository
 {

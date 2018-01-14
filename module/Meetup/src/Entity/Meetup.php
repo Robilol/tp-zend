@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Meetup\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Ramsey\Uuid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use Meetup\Entity\User;
 

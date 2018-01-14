@@ -4,13 +4,9 @@ declare(strict_types=1);
 
 namespace Meetup\Controller;
 
-use Cinema\Entity\Film;
-use Cinema\Form\FilmForm;
 use Doctrine\ORM\EntityManager;
 use Meetup\Entity\Company;
-use Meetup\Entity\Meetup;
 use Meetup\Form\CompanyForm;
-use Meetup\Form\MeetupForm;
 use Psr\Container\ContainerInterface;
 
 final class CompanyControllerFactory

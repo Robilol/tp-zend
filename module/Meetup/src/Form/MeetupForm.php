@@ -14,7 +14,6 @@ class MeetupForm extends Form implements InputFilterProviderInterface
 {
     public function __construct($users, $companies)
     {
-
         $optionsCompany = [];
 
         foreach ($companies as $company) /* @var $company \Meetup\Entity\Company */

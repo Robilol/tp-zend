@@ -7,7 +7,6 @@ namespace Meetup\Form;
 use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\Callback;
 use Zend\Validator\StringLength;
 
 class CompanyForm extends Form implements InputFilterProviderInterface

@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Meetup\Controller;
 
-use Meetup\Entity\Meetup;
 use Meetup\Form\CompanyForm;
 use Meetup\Repository\CompanyRepository;
-use Meetup\Repository\MeetupRepository;
-use Meetup\Form\MeetupForm;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -49,7 +46,7 @@ final class CompanyController extends AbstractActionController
             if ($form->isValid()) {
                 $company = $this->companyRepository->createCompany(
                     $form->getData()['name'],
-                    $form->getData()['address'] ?? '',
+                    $form->getData()['address'],
                     $form->getData()['city']
                 );
                 $this->companyRepository->add($company);
@@ -80,7 +77,7 @@ final class CompanyController extends AbstractActionController
                 $this->companyRepository->editCompany(
                     $company,
                     $form->getData()['name'],
-                    $form->getData()['address'] ?? '',
+                    $form->getData()['address'],
                     $form->getData()['city']
                 );
                 return $this->redirect()->toRoute('company');

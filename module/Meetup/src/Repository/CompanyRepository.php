@@ -6,7 +6,6 @@ namespace Meetup\Repository;
 
 use Meetup\Entity\Company;
 use Doctrine\ORM\EntityRepository;
-use Meetup\Module;
 
 final class CompanyRepository extends EntityRepository
 {

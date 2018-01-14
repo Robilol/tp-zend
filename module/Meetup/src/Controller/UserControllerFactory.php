@@ -7,7 +7,6 @@ namespace Meetup\Controller;
 use Doctrine\ORM\EntityManager;
 use Meetup\Entity\Company;
 use Meetup\Entity\User;
-use Meetup\Form\UserForm;
 use Psr\Container\ContainerInterface;
 
 final class UserControllerFactory

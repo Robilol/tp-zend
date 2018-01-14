@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Meetup\Controller;
 
-use Meetup\Entity\Meetup;
 use Meetup\Repository\CompanyRepository;
 use Meetup\Repository\MeetupRepository;
 use Meetup\Form\MeetupForm;
