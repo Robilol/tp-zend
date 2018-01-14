@@ -12,8 +12,22 @@ use Zend\Validator\StringLength;
 
 class MeetupForm extends Form implements InputFilterProviderInterface
 {
-    public function __construct()
+    public function __construct($users, $companies)
     {
+        $optionsCompany = [];
+
+        foreach ($companies as $company) /* @var $company \Meetup\Entity\Company */
+        {
+            $optionsCompany[$company->getId()] = $company->getName();
+        }
+
+        $optionsUser = [];
+
+        foreach ($users as $user) /* @var $user \Meetup\Entity\User */
+        {
+            $optionsUser[$user->getId()] = $user->getFirstname()." ".$user->getLastname();
+        }
+
         parent::__construct('meetup');
 
         $this->add([
@@ -53,6 +67,36 @@ class MeetupForm extends Form implements InputFilterProviderInterface
             'name' => 'etime',
             'options' => [
                 'label' => 'End date',
+            ],
+        ]);
+
+        $this->add([
+            'type' => Element\Select::class,
+            'name' => 'creator',
+            'options' => [
+                'label' => 'Creator',
+                'value_options' => $optionsUser
+            ],
+        ]);
+
+        $this->add([
+            'type' => Element\Select::class,
+            'name' => 'company',
+            'options' => [
+                'label' => 'Company',
+                'value_options' => $optionsCompany
+            ],
+        ]);
+
+        $this->add([
+            'type' => Element\Select::class,
+            'name' => 'participants',
+            'attributes' => array(
+                'multiple' => 'multiple',
+            ),
+            'options' => [
+                'label' => 'Participants',
+                'value_options' => $optionsUser
             ],
         ]);
     }

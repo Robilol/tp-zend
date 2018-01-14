@@ -2,11 +2,15 @@
 
 <table>
     <tr>
-        <td>Id</td><td>Title</td><td>Description</td><td>Start time</td><td>End time</td><td>Options</td>
+        <td>Id</td><td>Title</td><td>Description</td><td>Start time</td><td>End time</td><td>Creator</td><td>Company</td><td>Participants</td><td>Options</td>
     </tr>
     <?php foreach ($this->meetups as $meetup): /* @var $meetup \Meetup\Entity\Meetup */ ?>
         <tr>
-            <td><?= $meetup->getId() ?></td><td><?= $meetup->getTitle() ?></td><td><?= $meetup->getDescription() ?></td><td><?= $meetup->getStime() ?></td><td><?= $meetup->getEtime() ?></td><td><a href="<?= $this->url('meetup/edit', ['id' => $meetup->getId()]) ?>" class="btn btn-primary">Edit</a><a href="<?= $this->url('meetup/delete', ['id' => $meetup->getId()]) ?>" class="btn btn-primary">Delete</a><a href="<?= $this->url('meetup/show', ['id' => $meetup->getId()]) ?>" class="btn btn-primary">Show</a></td>
+            <td><?= $meetup->getId() ?></td><td><?= $meetup->getTitle() ?></td><td><?= $meetup->getDescription() ?></td><td><?= $meetup->getStime() ?></td><td><?= $meetup->getEtime() ?></td><td><?= $meetup->getCreator()->getFirstname()." ".$meetup->getCreator()->getLastname() ?></td><td><?= $meetup->getCompany()->getName() ?></td>
+        <td><ul><?php foreach ($meetup->getParticipants() as $user): /* @var $user \Meetup\Entity\User */ ?>
+            <li><?= $user->getFirstname()." ".$user->getLastname() ?></li>
+        <?php endforeach; ?></ul></td>
+        <td><a href="<?= $this->url('meetup/edit', ['id' => $meetup->getId()]) ?>" class="btn btn-primary">Edit</a><a href="<?= $this->url('meetup/delete', ['id' => $meetup->getId()]) ?>" class="btn btn-primary">Delete</a><a href="<?= $this->url('meetup/show', ['id' => $meetup->getId()]) ?>" class="btn btn-primary">Show</a></td>
         </tr>
     <?php endforeach; ?>
 </table>

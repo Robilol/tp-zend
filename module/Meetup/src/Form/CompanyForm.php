@@ -7,27 +7,19 @@ namespace Meetup\Form;
 use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Validator\Callback;
 use Zend\Validator\StringLength;
 
-class UserForm extends Form implements InputFilterProviderInterface
+class CompanyForm extends Form implements InputFilterProviderInterface
 {
-    public function __construct($companies)
+    public function __construct()
     {
-        $options = [];
-
-        foreach ($companies as $company) /* @var $company \Meetup\Entity\Company */
-        {
-            $options[$company->getId()] = $company->getName();
-        }
-
-        parent::__construct('user');
+        parent::__construct('company');
 
         $this->add([
             'type' => Element\Text::class,
-            'name' => 'firstname',
+            'name' => 'name',
             'options' => [
-                'label' => 'Firstname',
+                'label' => 'Name',
             ],
         ]);
 
@@ -40,19 +32,18 @@ class UserForm extends Form implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'type' => Element\Text::class,
-            'name' => 'lastname',
+            'type' => Element\Textarea::class,
+            'name' => 'address',
             'options' => [
-                'label' => 'Lastname',
+                'label' => 'Address',
             ],
         ]);
 
         $this->add([
-            'type' => Element\Select::class,
-            'name' => 'company',
+            'type' => Element\Text::class,
+            'name' => 'city',
             'options' => [
-                'label' => 'Company',
-                'value_options' => $options
+                'label' => 'City',
             ],
         ]);
     }
@@ -60,7 +51,7 @@ class UserForm extends Form implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-            'firstname' => [
+            'name' => [
                 'validators' => [
                     [
                         'name' => StringLength::class,
@@ -71,7 +62,18 @@ class UserForm extends Form implements InputFilterProviderInterface
                     ],
                 ],
             ],
-            'lastname' => [
+            'address' => [
+                'validators' => [
+                    [
+                        'name' => StringLength::class,
+                        'options' => [
+                            'min' => 2,
+                            'max' => 50,
+                        ],
+                    ],
+                ],
+            ],
+            'city' => [
                 'validators' => [
                     [
                         'name' => StringLength::class,

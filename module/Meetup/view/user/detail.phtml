@@ -1,9 +1,8 @@
-<h1>Meetup <?= $meetup->getId() ?></h1>
+<h1>User <?= $user->getId() ?></h1>
 
 <ul>
-    <li><strong>ID : </strong><?= $meetup->getId() ?></li>
-    <li><strong>Title : </strong><?= $meetup->getTitle() ?></li>
-    <li><strong>Description : </strong><?= $meetup->getDescription() ?></li>
-    <li><strong>Start time : </strong><?= $meetup->getStime() ?></li>
-    <li><strong>End time : </strong><?= $meetup->getEtime() ?></li>
+    <li><strong>ID : </strong><?= $user->getId() ?></li>
+    <li><strong>Firstname : </strong><?= $user->getFirstname() ?></li>
+    <li><strong>Lastname : </strong><?= $user->getLastname() ?></li>
+    <li><strong>Company : </strong><?= $user->getCompany()->getName() ?></li>
 </ul>

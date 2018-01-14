@@ -1,0 +1,25 @@
+<h1>Edit an company</h1>
+
+<?php
+    $form = $this->form; /* @var $form \Zend\Form\Form */
+?>
+
+<?= $this->form()->openTag($form); ?>
+
+<div>
+<?= $this->formRow($form->get('name')->setValue($company->getName())) ?>
+</div>
+
+<div>
+<?= $this->formRow($form->get('address')->setValue($company->getAddress())) ?>
+</div>
+
+<div>
+<?= $this->formRow($form->get('city')->setValue($company->getCity())) ?>
+</div>
+
+<div>
+<?= $this->formInput($form->get('submit')) ?>
+</div>
+
+<?= $this->form()->closeTag($form); ?>

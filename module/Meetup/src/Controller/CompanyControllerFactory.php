@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace Meetup\Controller;
 
-use Cinema\Entity\Film;
-use Cinema\Form\FilmForm;
 use Doctrine\ORM\EntityManager;
-use Meetup\Entity\Meetup;
-use Meetup\Form\MeetupForm;
+use Meetup\Entity\Company;
+use Meetup\Form\CompanyForm;
 use Psr\Container\ContainerInterface;
 
-final class MeetupControllerFactory
+final class CompanyControllerFactory
 {
-    public function __invoke(ContainerInterface $container) : MeetupController
+    public function __invoke(ContainerInterface $container) : CompanyController
     {
-        $meetupRepository = $container->get(EntityManager::class)->getRepository(Meetup::class);
-        $meetupForm = $container->get(MeetupForm::class);
+        $companyRepository = $container->get(EntityManager::class)->getRepository(Company::class);
+        $companyForm = $container->get(CompanyForm::class);
 
-        return new MeetupController($meetupRepository, $meetupForm);
+        return new CompanyController($companyRepository, $companyForm);
     }
 }

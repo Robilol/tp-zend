@@ -6,7 +6,6 @@ namespace Meetup\Repository;
 
 use Meetup\Entity\Company;
 use Doctrine\ORM\EntityRepository;
-use Meetup\Module;
 
 final class CompanyRepository extends EntityRepository
 {
@@ -17,7 +16,7 @@ final class CompanyRepository extends EntityRepository
     }
 
 
-    public function createCompanyFromNameAndDescription(string $name, string $address, string $city)
+    public function createCompany(string $name, string $address, string $city)
     {
         return new Company($name, $address, $city);
     }

@@ -7,7 +7,6 @@ namespace Meetup\Repository;
 use Meetup\Entity\Company;
 use Meetup\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Meetup\Module;
 
 final class UserRepository extends EntityRepository
 {
@@ -18,7 +17,7 @@ final class UserRepository extends EntityRepository
     }
 
 
-    public function createUserFromNameAndDescription(string $firstname, string $lastname, Company $company)
+    public function createUser(string $firstname, string $lastname, Company $company)
     {
         return new User($firstname, $lastname, $company);
     }

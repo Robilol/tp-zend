@@ -6,4 +6,11 @@
     <li><strong>Description : </strong><?= $meetup->getDescription() ?></li>
     <li><strong>Start time : </strong><?= $meetup->getStime() ?></li>
     <li><strong>End time : </strong><?= $meetup->getEtime() ?></li>
+    <li><strong>Creator : </strong><?= $meetup->getCreator()->getFirstname()." ".$meetup->getCreator()->getLastname() ?></li>
+    <li><strong>Company : </strong><?= $meetup->getCompany()->getName() ?></li>
+    <li><strong>Participants : </strong>
+        <ul><?php foreach ($meetup->getParticipants() as $user): /* @var $user \Meetup\Entity\User */ ?>
+                <li><?= $user->getFirstname()." ".$user->getLastname() ?></li>
+            <?php endforeach; ?></ul>
+    </li>
 </ul>
