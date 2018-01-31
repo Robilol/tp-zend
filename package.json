@@ -1,0 +1,28 @@
+{
+  "name": "tp-zend",
+  "version": "1.0.0",
+  "description": "Creation BDD de base ---------------------",
+  "main": "steps_file.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CatFishTeam/tp-zend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CatFishTeam/tp-zend/issues"
+  },
+  "homepage": "https://github.com/CatFishTeam/tp-zend#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "codeceptjs-webdriverio": "^1.1.0",
+    "nightmare": "^2.10.0",
+    "nightmare-upload": "^0.1.1"
+  }
+}
