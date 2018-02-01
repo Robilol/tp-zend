@@ -1,20 +1,26 @@
-Feature('Test user');
+Feature('Create user');
 
 Before((I) => {
     I.amOnPage('/');
 })
 
-Scenario('Add a member', (I) => {
+Scenario('Create an user', (I) => {
     I.click('Users');
     I.seeInCurrentUrl('/user');
     I.click('Add new');
     I.seeInCurrentUrl('/user/add');
-    I.fillField('firstname', 'Robin');
-    I.fillField('lastname', 'Regis');
-    I.selectOption('company', 'ESGI');
+    I.fillField('firstname', 'Jean');
+    I.fillField('lastname', 'Dupont');
+    I.selectOption('Company', 'ESGI');
     I.click('Submit');
-    I.see('//table/tr[contains(Robin)]');
-})
+    I.see('Dupont', 'td');
+    I.seeInCurrentUrl('/user');
+    I.see('Jean', 'tr:last-child td:nth-child(2)');
+    I.see('Dupont', 'tr:last-child td:nth-child(3)');
+    I.see('ESGI', 'tr:last-child td:nth-child(4)');
+});
 
+/*
 Scenario('Remove a member', (I) => {
 })
+*/
