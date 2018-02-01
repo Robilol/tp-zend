@@ -1,7 +1,7 @@
 {
   "tests": "tests/*_test.js",
   "timeout": 10000,
-  "output": "./output",
+  "output": "tests/output",
   "helpers": {},
   "include": {
     "I": "./steps_file.js"
@@ -13,7 +13,7 @@
     "Nightmare": {
       "url": "http://localhost:8080",
       "browser": "chrome",
-      "show": true,
+      "show": false,
       "restart": false
     }
   }
