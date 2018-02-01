@@ -1,0 +1,16 @@
+language: php
+
+php:
+    - 7.1
+services:
+    - mysql
+
+install:
+    - npm install
+    - composer install --prefer-dist --no-interaction --optimize-autoloader
+
+before_script:
+    - #Code that creates and seeds my database and so on
+
+script: ./node_modules/codeceptjs-webdriverio/codecept.js run --steps
+
